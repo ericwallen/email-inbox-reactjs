@@ -1,5 +1,5 @@
 import React from 'react'
-import NewMessage from './NewMessage'
+// import NewMessage from './NewMessage'
 const Toolbar = () => {
   return(
       <div className="row toolbar">

@@ -1,30 +1,19 @@
 import React from 'react'
-import MessagesData from './MessagesData.js'
-const Messages = () => {
-  return(
-    <div>
-    {MessagesData.map(x =>
+import messagesData from './MessagesData.js'
+import Msg from './Msg.js'
 
-      <div className="row message unread">
-        <div className="col-xs-1">
-          <div className="row">
-            <div className="col-xs-2">
-              <input type="checkbox" />
-            </div>
-            <div className="col-xs-2">
-              <i className="star fa fa-star-o"></i>
-            </div>
-          </div>
-        </div>
-        <div className="col-xs-11">
-          <a href="#">
-            {x.subject}
-          </a>
-        </div>
-      </div>
-    )}
+
+
+class Messages extends React.Component{
+  render(){
+  return (
+    <div className="collection">
+        {messagesData.map(msg => <Msg key={ msg.id } msgSubject={ msg.subject } msgRead={ msg.read } msgStarred={ msg.starred }/>) }
     </div>
   )
 }
+}
+
+
 
 export default Messages
