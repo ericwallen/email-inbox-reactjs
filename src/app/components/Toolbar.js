@@ -1,6 +1,6 @@
 import React from 'react'
 // import NewMessage from './NewMessage'
-const Toolbar = () => {
+const Toolbar = ({onGreet}) =>{
   return(
       <div className="row toolbar">
         <div className="col-md-12">
@@ -38,9 +38,21 @@ const Toolbar = () => {
           <button className="btn btn-default">
             <i className="fa fa-trash-o"></i>
           </button>
+          <button className="btn btn-default" onClick={onGreet}>
+            Click
+          </button>
         </div>
+
       </div>
+
+
+
+
+
   )
 }
+
+
+
 
 export default Toolbar
