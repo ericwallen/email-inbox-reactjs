@@ -38,17 +38,8 @@ const Toolbar = ({onGreet}) =>{
           <button className="btn btn-default">
             <i className="fa fa-trash-o"></i>
           </button>
-          <button className="btn btn-default" onClick={onGreet}>
-            Click
-          </button>
         </div>
-
       </div>
-
-
-
-
-
   )
 }
 

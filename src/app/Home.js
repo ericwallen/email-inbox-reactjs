@@ -1,15 +1,9 @@
 import React from 'react'
 import Toolbar from './components/Toolbar.js'
 import Messages from './components/Messages.js'
-
-
 const baseURL = "https://react-inbox-api.herokuapp.com/api"
 
-
-
 class Home extends React.Component {
-
-
     constructor() {
        super()
        this.state = {
@@ -24,32 +18,39 @@ class Home extends React.Component {
      }
 
 
-
-
      onClickStar(messages) {
-       let id = messages.id
-       console.log(id);
-        this.setState(prevState => ({
-          msgStarred: !prevState.starred
-        }));
-      }
+       var id = messages.id
+       const data = {
+         "messageIds": [id],
+         "command":  "star",
+         "star": !messages.starred
+       }
+       const settings = {
+         method: 'PATCH',
+         headers: {
+           'content-type': 'application/json'
+         },
+         body: JSON.stringify(data)
+       }
+       fetch(`${baseURL}/messages`, settings)
+        .then(data => {
+          this.setState((prevState) => {
+            prevState.messages[id -1].starred = !prevState.messages[id -1].starred
+          })
 
+        })
+    }
 
-
-      onGreet () {
-         alert("hello")
-      }
 
   render() {
-    console.log(this.state.messages);
     return (
       <div className="main-container">
-        {this.state.name}
-        <Toolbar/>
+        <Toolbar
+
+        />
         <Messages
-          onGreet={this.onGreet.bind(this)}
+
           onClickStar={this.onClickStar.bind(this)}
-          msgStarred
           messagesData={this.state.messages}
         />
       </div>

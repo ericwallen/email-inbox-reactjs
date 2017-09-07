@@ -4,16 +4,14 @@ import Msg from './Msg.js'
 
 
 
-const Messages = ({onGreet, onClickStar, msgStarred, messagesData}) => {
+
+const Messages = ({onClickStar, messagesData}) => {
   return (
 
     <div>
         {messagesData.map(msg =>
-          <Msg onGreet={onGreet} onClickStar={onClickStar} key={ msg.id } msgSubject={ msg.subject } msgRead={ msg.read } msgStarred={ msg.starred } messagesData={msg}/>
+          <Msg onClickStar={onClickStar} key={ msg.id } msgSubject={ msg.subject } msgStarred={ msg.starred } msgRead={ msg.read } msgLabels={ msg.labels } messagesData={msg}/>
         )}
-        <button className="btn btn-default" onClick={onGreet}>
-          in child
-        </button>
     </div>
   )
 }
