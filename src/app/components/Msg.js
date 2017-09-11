@@ -1,21 +1,23 @@
 import React from 'react'
 
 
-  const Msg = ({msgSubject, onClickStar, msgStarred, msgRead, messagesData, msgLabels}) =>{
-
-  const starButton = msgStarred ? "star fa fa-star-o" : "star fa fa-star"
-  const isMsgRead = msgRead ? "row message read" : "row message unread"
-  const showMsgLabels = msgLabels.map(function(x){
-    return <span className="label label-warning">{x}</span>
+  const Msg = ({onClickStar, onSelect, messagesData}) =>{
+  const rowClasses = isMsgRead && isSelected
+  const msgSubject = messagesData.subject
+  const starButton = messagesData.starred ? "star fa fa-star-o" : "star fa fa-star"
+  const isMsgRead = messagesData.read ? "row message read" : "row message unread"
+  const isSelected = messagesData.selected ? "selected" : "no"
+  const msgLabels = messagesData.labels.map((label, index) => {
+    return <span  className="label label-warning" key={index}>{label}</span>
   })
 
 
     return(
-      <div className={isMsgRead}>
+      <div className={isMsgRead + " " + isSelected} >
         <div className="col-xs-1">
           <div className="row">
             <div className="col-xs-2">
-                <input type="checkbox" />
+                <input type="checkbox" onChange={() => onSelect(messagesData)} />
             </div>
             <div className="col-xs-2">
               <i className={starButton} onClick={() => onClickStar(messagesData)}></i>
@@ -24,7 +26,7 @@ import React from 'react'
           </div>
         </div>
       <div className="col-xs-11">
-          {showMsgLabels}
+          {msgLabels}
           {msgSubject}
       </div>
     </div>

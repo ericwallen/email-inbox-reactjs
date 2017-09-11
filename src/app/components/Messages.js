@@ -5,12 +5,12 @@ import Msg from './Msg.js'
 
 
 
-const Messages = ({onClickStar, messagesData}) => {
+const Messages = ({onClickStar, onSelect, messagesData}) => {
   return (
 
     <div>
         {messagesData.map(msg =>
-          <Msg onClickStar={onClickStar} key={ msg.id } msgSubject={ msg.subject } msgStarred={ msg.starred } msgRead={ msg.read } msgLabels={ msg.labels } messagesData={msg}/>
+          <Msg onClickStar={onClickStar} onSelect={onSelect} key={ msg.id } msgLabels={ msg.labels } messagesData={msg}/>
         )}
     </div>
   )

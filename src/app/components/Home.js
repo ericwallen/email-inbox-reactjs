@@ -1,6 +1,6 @@
 import React from 'react'
-import Toolbar from './components/Toolbar.js'
-import Messages from './components/Messages.js'
+import Toolbar from './Toolbar.js'
+import Messages from './Messages.js'
 const baseURL = "https://react-inbox-api.herokuapp.com/api"
 
 class Home extends React.Component {
@@ -41,6 +41,32 @@ class Home extends React.Component {
         })
     }
 
+    onSelect(messages) {
+      let updateMessages = []
+
+      this.state.messages.map(msg => {
+        if (msg.id === messages.id){
+          msg.selected = true
+          msg.id = messages.id
+          updateMessages = msg
+          return msg
+        } else{
+          return "nothing was found"
+        }
+      })
+
+      let index = messages.id -1
+
+      const clone = [
+          ...this.state.messages.slice(0, index),
+          updateMessages,
+          ...this.state.messages.slice(index +1),
+      ]
+
+      this.setState({messages: clone})
+
+
+    }
 
   render() {
     return (
@@ -49,8 +75,8 @@ class Home extends React.Component {
 
         />
         <Messages
-
           onClickStar={this.onClickStar.bind(this)}
+          onSelect={this.onSelect.bind(this)}
           messagesData={this.state.messages}
         />
       </div>
