@@ -12,7 +12,7 @@ const Messages = ({onClickStar, onSelect,  messagesData, dateTime}) => {
         {messagesData.map(msg =>
           <Msg onClickStar={onClickStar} onSelect={onSelect} key={ msg.id } msgLabels={ msg.labels } messagesData={msg}/>
         )}
-        {dateTime()}
+
     </div>
   )
 }

@@ -1,17 +1,33 @@
 import React from 'react'
-// import NewMessage from './NewMessage'
-const Toolbar = ({onSelectAll, messagesData, allSelected, myGreeting}) =>{
 
-  const ifSelected = allSelected ?
-  <button className="btn btn-default" onClick={() => onSelectAll(messagesData)}>
-    <i className="fa fa-minus-square-o"></i>
-  </button>
 
-  :
 
-  <button className="btn btn-default" onClick={() => onSelectAll(messagesData)}>
-    <i className="fa fa-square-o"></i>
-  </button>
+
+
+const Toolbar = ({onSelectAll, onDeselectAll, messagesData, everySelected, someSelected, noneSelected, markAsRead, markAsUnread}) =>{
+
+  let selectionButton = ""
+
+
+  if  (someSelected === true || everySelected === false) {
+    selectionButton =   <button className="btn btn-default" onClick={() => onSelectAll(messagesData)}>
+        <i className="fa fa-check-square-o"></i>
+      </button>
+  }
+
+  if (everySelected === true) {
+    selectionButton =   <button className="btn btn-default" onClick={() => onDeselectAll(messagesData)}>
+        <i className="fa fa-minus-square-o"></i>
+      </button>
+  }
+
+  if (noneSelected === true) {
+    selectionButton =   <button className="btn btn-default" onClick={() => onSelectAll(messagesData)}>
+        <i className="fa fa-square-o"></i>
+      </button>
+  }
+
+
 
 
 
@@ -28,12 +44,14 @@ const Toolbar = ({onSelectAll, messagesData, allSelected, myGreeting}) =>{
           </a>
 
 
-          {ifSelected}
 
-          
-          <button className="btn btn-default">Mark As Read</button>
+{selectionButton}
 
-          <button className="btn btn-default">Mark As Unread</button>
+
+
+          <button className="btn btn-default" onClick={() => markAsRead(messagesData)}>Mark As Read</button>
+
+          <button className="btn btn-default" onClick={() => markAsUnread(messagesData)}>Mark As Unread</button>
 
           <select className="form-control label-select">
             <option>Apply label</option>
