@@ -2,14 +2,24 @@ import React from 'react'
 import Toolbar from './Toolbar.js'
 import Messages from './Messages.js'
 const baseURL = "https://react-inbox-api.herokuapp.com/api"
+var moment = require('moment');
 
 class Home extends React.Component {
     constructor() {
        super()
        this.state = {
-         messages: []
+         messages: [],
+         everySelected: false,
+         someSelected: false,
+         noneSelected: true
      }
      }
+
+     dateTime(){
+       var getTime = moment().format();
+       return getTime
+     }
+
 
      async componentDidMount() {
        const response = await fetch(`${baseURL}/messages`)
@@ -46,7 +56,7 @@ class Home extends React.Component {
 
       this.state.messages.map(msg => {
         if (msg.id === messages.id){
-          msg.selected = true
+          msg.selected = !msg.selected
           msg.id = messages.id
           updateMessages = msg
           return msg
@@ -63,22 +73,104 @@ class Home extends React.Component {
           ...this.state.messages.slice(index +1),
       ]
 
+
       this.setState({messages: clone})
 
 
+      let selectedForEach = []
+
+      this.state.messages.forEach(item =>
+      selectedForEach.push(item.selected)
+      )
+
+      let someSelected = selectedForEach.some(item => item === true)
+      let everySelected = selectedForEach.every(item => item === true)
+
+
+      if (everySelected === true) {
+      this.setState({everySelected: true})
+      }
+
+      if (everySelected === false){
+      this.setState({everySelected: false})
+      }
+
+      if (someSelected === true ){
+      this.setState({someSelected: true})
+      this.setState({noneSelected: false})
+      }
+
+      if (someSelected === false) {
+      this.setState({someSelected: false})
+      this.setState({noneSelected: true})
+      }
     }
+
+
+    onSelectAll(messages){
+      let updateMessages = []
+
+      this.state.messages.map((msg, index) => {
+          msg.selected = true
+          msg.key = msg.id
+          updateMessages = msg
+          console.log(msg);
+          return msg
+      })
+
+      const clone = [
+          ...this.state.messages.slice(0),
+          updateMessages,
+          ...this.state.messages.slice(-1),
+      ]
+
+      this.setState({messages: clone})
+
+      let selectedForEach = []
+
+      this.state.messages.forEach(item =>
+      selectedForEach.push(item.selected)
+      )
+
+      let someSelected = selectedForEach.some(item => item === true)
+      let everySelected = selectedForEach.every(item => item === true)
+
+
+      if (everySelected === true) {
+      this.setState({everySelected: true})
+      }
+
+      if (everySelected === false){
+      this.setState({everySelected: false})
+      }
+
+      if (someSelected === true ){
+      this.setState({someSelected: true})
+      this.setState({noneSelected: false})
+      }
+
+      if (someSelected === false) {
+      this.setState({someSelected: false})
+      this.setState({noneSelected: true})
+      }
+    }
+
+
 
   render() {
     return (
       <div className="main-container">
         <Toolbar
+          onSelectAll={this.onSelectAll.bind(this)}
 
         />
         <Messages
           onClickStar={this.onClickStar.bind(this)}
           onSelect={this.onSelect.bind(this)}
           messagesData={this.state.messages}
+          dateTime={this.dateTime.bind(this)}
         />
+
       </div>
     );
   }

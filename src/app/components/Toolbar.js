@@ -1,6 +1,20 @@
 import React from 'react'
 // import NewMessage from './NewMessage'
-const Toolbar = ({onGreet}) =>{
+const Toolbar = ({onSelectAll, messagesData, allSelected, myGreeting}) =>{
+
+  const ifSelected = allSelected ?
+  <button className="btn btn-default" onClick={() => onSelectAll(messagesData)}>
+    <i className="fa fa-minus-square-o"></i>
+  </button>
+
+  :
+
+  <button className="btn btn-default" onClick={() => onSelectAll(messagesData)}>
+    <i className="fa fa-square-o"></i>
+  </button>
+
+
+
   return(
       <div className="row toolbar">
         <div className="col-md-12">
@@ -13,10 +27,10 @@ const Toolbar = ({onGreet}) =>{
             <i className="fa fa-plus"></i>
           </a>
 
-          <button className="btn btn-default">
-            <i className="fa fa-minus-square-o"></i>
-          </button>
 
+          {ifSelected}
+
+          
           <button className="btn btn-default">Mark As Read</button>
 
           <button className="btn btn-default">Mark As Unread</button>
