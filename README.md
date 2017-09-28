@@ -1,3 +1,3 @@
-Deployed URL https://g-school-react-inbox.firebaseapp.com/
+###Live Demo https://ericwallen.github.io/react-inbox/
 
-hello
+#I hope you enjoy. If you want to get in touch with me you can find me on twiter @ErcWln
