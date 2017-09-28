@@ -1,8 +1,8 @@
 {
   "name": "react-inbox",
-  "homepage": "https://ericwallen.github.io/react-inbox/",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ericwallen.github.io/react-inbox/",
   "dependencies": {
     "bootstrap": "3",
     "font-awesome": "^4.7.0",
@@ -12,10 +12,11 @@
     "react-scripts": "1.0.12"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-  },
-  "devDependencies": {}
+    "eject": "react-scripts eject"
+  }
 }
